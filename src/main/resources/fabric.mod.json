@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "headpets",
+  "version": "${version}",
+  "name": "Headpets",
+  "description": "PET HEADS",
+  "authors": [
+    "unilock"
+  ],
+  "contact": {
+    "repo": "https://github.com/unilock/headpets"
+  },
+  "license": "MIT",
+  "icon": "assets/headpets/icon.png",
+  "environment": "server",
+  "entrypoints": {
+    "client": [
+      "net.unilock.headpets.client.HeadpetsClient"
+    ],
+    "main": [
+      "net.unilock.headpets.Headpets"
+    ]
+  },
+  "mixins": [
+    "headpets.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.17",
+    "minecraft": "1.19.3"
+  }
+}
