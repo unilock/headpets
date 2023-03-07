@@ -14,10 +14,7 @@
   "icon": "assets/headpets/icon.png",
   "environment": "server",
   "entrypoints": {
-    "client": [
-      "net.unilock.headpets.client.HeadpetsClient"
-    ],
-    "main": [
+    "server": [
       "net.unilock.headpets.Headpets"
     ]
   },
@@ -25,7 +22,7 @@
     "headpets.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.17",
-    "minecraft": "1.19.3"
+    "fabricloader": "*",
+    "minecraft": "~1.19.3"
   }
 }
