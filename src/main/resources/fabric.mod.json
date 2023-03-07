@@ -3,7 +3,7 @@
   "id": "headpets",
   "version": "${version}",
   "name": "Headpets",
-  "description": "sneak + right-click a player to pet them <3\n\nicon source: https://www.pixiv.net/en/artworks/88138977",
+  "description": "sneak + right-click a player to pet them <3\n(server-side!)\n\nicon source: https://www.pixiv.net/en/artworks/88138977",
   "authors": [
     "unilock"
   ],

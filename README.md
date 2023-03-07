@@ -1,6 +1,7 @@
 # headpets
 
 sneak + right-click a player to pet them <3
+(server-side!)
 
 icon source: https://www.pixiv.net/en/artworks/88138977
 
