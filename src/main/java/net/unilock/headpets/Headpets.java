@@ -1,9 +1,9 @@
 package net.unilock.headpets;
 
-import net.fabricmc.api.ModInitializer;
+import net.fabricmc.api.DedicatedServerModInitializer;
 
-public class Headpets implements ModInitializer {
+public class Headpets implements DedicatedServerModInitializer {
     @Override
-    public void onInitialize() {
+    public void onInitializeServer() {
     }
 }
