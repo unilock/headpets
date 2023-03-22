@@ -11,9 +11,9 @@
     "repo": "https://github.com/unilock/headpets"
   },
   "license": "MIT",
-  "environment": "server",
+  "environment": "*",
   "entrypoints": {
-    "server": [
+    "main": [
       "net.unilock.headpets.Headpets"
     ]
   },
@@ -22,6 +22,6 @@
   ],
   "depends": {
     "fabricloader": "*",
-    "minecraft": "~1.19.3"
+    "minecraft": ">=1.19.3"
   }
 }
