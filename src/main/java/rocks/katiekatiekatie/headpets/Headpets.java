@@ -1,4 +1,4 @@
-package net.unilock.headpets;
+package rocks.katiekatiekatie.headpets;
 
 import net.fabricmc.api.ModInitializer;
 

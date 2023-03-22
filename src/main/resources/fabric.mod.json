@@ -5,7 +5,7 @@
   "name": "headpets",
   "description": "sneak + right-click a player to pet them <3\n(server-side!)",
   "authors": [
-    "unilock"
+    "kate"
   ],
   "contact": {
     "repo": "https://github.com/unilock/headpets"
@@ -14,7 +14,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.unilock.headpets.Headpets"
+      "rocks.katiekatiekatie.headpets.Headpets"
     ]
   },
   "mixins": [
