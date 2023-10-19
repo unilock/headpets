@@ -1,4 +1,4 @@
-package rocks.katiekatiekatie.headpets.mixin;
+package cc.unilock.headpets.mixin;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;

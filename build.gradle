@@ -1,53 +1,57 @@
 plugins {
-    id 'fabric-loom' version '1.2-SNAPSHOT'
-    id 'io.github.juuxel.loom-quiltflower' version '1.8.0'
-    id 'maven-publish'
-}
-
-version = "${project.mod_version}+${project.minecraft_version}"
-group = project.maven_group
-
-repositories {
-}
-
-dependencies {
-    // To change the versions see the gradle.properties file
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	id 'maven-publish'
+	alias libs.plugins.quilt.loom
 }
 
 base {
-    archivesName = project.archives_base_name
+	archivesName = project.archives_base_name
+}
+
+version = "${project.version}+${libs.versions.minecraft.get()}"
+group = project.maven_group
+
+repositories {
+	// Add repositories to retrieve artifacts from in here.
+	// You should only use this when depending on other mods because
+	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
+	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
+	// for more information about repositories.
+}
+
+// All the dependencies are declared at gradle/libs.version.toml and referenced with "libs.<id>"
+dependencies {
+	minecraft libs.minecraft
+	mappings variantOf(libs.quilt.mappings) { classifier 'intermediary-v2' }
+	modImplementation libs.quilt.loader
 }
 
 processResources {
-    inputs.property "version", project.mod_version
-    filteringCharset "UTF-8"
+	inputs.property 'version', version
 
-    filesMatching("fabric.mod.json") {
-        expand "version": project.mod_version
-    }
+	filesMatching('quilt.mod.json') {
+		expand 'version': version
+	}
 }
 
 tasks.withType(JavaCompile).configureEach {
-    it.options.release = 17
+	it.options.encoding = 'UTF-8'
+	it.options.release = 17
 }
 
 java {
-    withSourcesJar()
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
 
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+	withSourcesJar()
 }
 
 jar {
-    from("LICENSE") {
-        rename { "${it}_${base.archivesName.get()}"}
-    }
+	from('LICENSE') {
+		rename { "${it}_${base.archivesName.get()}" }
+	}
 }
 
-// configure the maven publication
+// Configure the maven publication
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
