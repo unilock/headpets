@@ -1,5 +1,6 @@
 package cc.unilock.headpets.mixin;
 
+import cc.unilock.headpets.config.HeadpetsConfig;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
@@ -21,11 +22,13 @@ public class PlayerEntityMixin {
     public void headPetMoment(Entity entity, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
         if (!petter.isSpectator() && petter.isSneaking() && petter.getStackInHand(hand).isEmpty()) {
             // TODO: separate conditional for when i feel like adding support for more entities
-            if (entity instanceof PlayerEntity) {
+            if (entity instanceof PlayerEntity pettee) {
                 if (!petter.getWorld().isClient()) {
-                    var petteeEyePos = entity.getEyePos();
+					petter.heal(HeadpetsConfig.INSTANCE.petter_heal_amount.value());
+					pettee.heal(HeadpetsConfig.INSTANCE.pettee_heal_amount.value());
 
-					((ServerWorld) entity.getWorld()).spawnParticles(ParticleTypes.HEART, petteeEyePos.getX(), petteeEyePos.getY() + 0.5, petteeEyePos.getZ(), 1, 0, 0, 0, 0.1);
+                    var petteeEyePos = pettee.getEyePos();
+					((ServerWorld) pettee.getWorld()).spawnParticles(ParticleTypes.HEART, petteeEyePos.getX(), petteeEyePos.getY() + 0.5, petteeEyePos.getZ(), 1, 0, 0, 0, 0.1);
                 } else {
                     petter.swingHand(hand);
                 }
