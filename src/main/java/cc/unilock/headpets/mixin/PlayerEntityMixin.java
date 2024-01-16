@@ -19,13 +19,13 @@ public class PlayerEntityMixin {
 	private final PlayerEntity petter = (PlayerEntity) (Object) this;
 
     @Inject(method = "interact", at = @At("HEAD"), cancellable = true)
-    public void headPetMoment(Entity entity, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
-        if (!petter.isSpectator() && petter.isSneaking() && petter.getStackInHand(hand).isEmpty()) {
-            // TODO: separate conditional for when i feel like adding support for more entities
+    private void interact(Entity entity, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
+        if (!petter.isSpectator() && petter.isSneaking() && petter.getMainHandStack().isEmpty()) {
+            // TODO: separate conditional for future support for more entities
             if (entity instanceof PlayerEntity pettee) {
                 if (!petter.getWorld().isClient()) {
-					petter.heal(HeadpetsConfig.INSTANCE.petter_heal_amount.value());
-					pettee.heal(HeadpetsConfig.INSTANCE.pettee_heal_amount.value());
+					petter.heal(HeadpetsConfig.CONFIG.petter_heal_amount);
+					pettee.heal(HeadpetsConfig.CONFIG.pettee_heal_amount);
 
                     var petteeEyePos = pettee.getEyePos();
 					((ServerWorld) pettee.getWorld()).spawnParticles(ParticleTypes.HEART, petteeEyePos.getX(), petteeEyePos.getY() + 0.5, petteeEyePos.getZ(), 1, 0, 0, 0, 0.1);

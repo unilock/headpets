@@ -1,0 +1,22 @@
+{
+	"schemaVersion": 1,
+	"id": "headpets",
+	"version": "${version}",
+	"name": "headpets",
+	"description": "sneak + right-click a player to pet them <3\n(server-side!)",
+	"authors": [
+		"unilock"
+	],
+	"contact": {
+		"sources": "https://github.com/unilock/headpets"
+	},
+	"license": "MIT",
+	"environment": "*",
+	"mixins": [
+		"headpets.mixins.json"
+	],
+	"depends": {
+		"fabricloader": "*",
+		"minecraft": ">=1.20"
+	}
+}

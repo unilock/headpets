@@ -1,52 +1,57 @@
 plugins {
+	id 'fabric-loom' version '1.5-SNAPSHOT'
 	id 'maven-publish'
-	alias libs.plugins.quilt.loom
 }
+
+version = "${project.mod_version}+${project.minecraft_version}+fabric"
+group = project.maven_group
 
 base {
 	archivesName = project.archives_base_name
 }
 
-version = "${project.version}+${libs.versions.minecraft.get()}"
-group = project.maven_group
-
 repositories {
-	// Add repositories to retrieve artifacts from in here.
-	// You should only use this when depending on other mods because
-	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
-	// for more information about repositories.
+	maven { url = "https://repo.sleeping.town/" }
 }
 
-// All the dependencies are declared at gradle/libs.version.toml and referenced with "libs.<id>"
+loom {
+    mods {
+		"headpets" {
+			sourceSet("main")
+		}
+	}
+}
+
 dependencies {
-	minecraft libs.minecraft
-	mappings variantOf(libs.quilt.mappings) { classifier 'intermediary-v2' }
-	modImplementation libs.quilt.loader
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+	implementation include("folk.sisby:kaleido-config:${project.kaleido_version}")
 }
 
 processResources {
-	inputs.property 'version', version
+	inputs.property "version", project.version
 
-	filesMatching('quilt.mod.json') {
-		expand 'version': version
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version
 	}
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.encoding = 'UTF-8'
+	it.options.encoding = "UTF-8"
 	it.options.release = 17
 }
 
 java {
+	withSourcesJar()
+
 	sourceCompatibility = JavaVersion.VERSION_17
 	targetCompatibility = JavaVersion.VERSION_17
-
-	withSourcesJar()
 }
 
 jar {
-	from('LICENSE') {
+	from("LICENSE") {
 		rename { "${it}_${base.archivesName.get()}" }
 	}
 }

@@ -1,15 +1,14 @@
 package cc.unilock.headpets.config;
 
-import org.quiltmc.config.api.ReflectiveConfig;
-import org.quiltmc.config.api.annotations.Comment;
-import org.quiltmc.config.api.values.TrackedValue;
-import org.quiltmc.loader.api.config.v2.QuiltConfig;
+import folk.sisby.kaleido.api.WrappedConfig;
+import folk.sisby.kaleido.lib.quiltconfig.api.annotations.Comment;
+import net.fabricmc.loader.api.FabricLoader;
 
-public class HeadpetsConfig extends ReflectiveConfig {
-	public static final HeadpetsConfig INSTANCE = QuiltConfig.create("headpets", "config", HeadpetsConfig.class);
+public class HeadpetsConfig extends WrappedConfig {
+	public static final HeadpetsConfig CONFIG = HeadpetsConfig.createToml(FabricLoader.getInstance().getConfigDir(), "headpets", "config", HeadpetsConfig.class);
 
 	@Comment("Amount to heal petter (0 to disable)")
-	public final TrackedValue<Float> petter_heal_amount = value(0.0F);
+	public final Float petter_heal_amount = 0.0F;
 	@Comment("Amount to heal pettee (0 to disable)")
-	public final TrackedValue<Float> pettee_heal_amount = value(2.0F);
+	public final Float pettee_heal_amount = 2.0F;
 }
